@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { AiOutlineShopping } from "react-icons/ai";
 import { ShoppinCartContext } from "../../Context";
 
 const Navbar = () => {
@@ -97,7 +97,10 @@ const Navbar = () => {
             Sing Ing
           </NavLink>
         </li>
-        <li className="flex justify-center"><ShoppingCartIcon className=" h-6 w-6 text-black-500 cursor-pointer" />{context.count}</li>
+        <li className="flex">
+          <AiOutlineShopping className=" h-6 w-6 text-black-500 cursor-pointer" />
+          <div>{context.count}</div>
+        </li>
       </ul>
     </nav>
   );

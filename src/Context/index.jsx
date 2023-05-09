@@ -8,12 +8,25 @@ const ShoppinCartProvider = ({ children }) => {
     children: PropTypes.node.isRequired,
   };
   const [count, setCount] = useState(0);
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+
+  // modificadores produc ditail open/close
+  const openProductDetail = () => setIsProductDetailOpen(true);
+  const closeProductDetail = () => setIsProductDetailOpen(false);
+
+  // Show product detail
+  const [showProductDetail, setShowProductDetail] = useState({});
 
   return (
     <ShoppinCartContext.Provider
       value={{
         count,
         setCount,
+        isProductDetailOpen,
+        openProductDetail,
+        closeProductDetail,
+        showProductDetail,
+        setShowProductDetail,
       }}
     >
       {children}
