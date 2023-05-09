@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Layout } from "../../Components/Layout";
 import { Card } from "../../Card/inde";
-
+import { ProductDetail } from "../../Components/PoriductDetial";
+// deberi estar en una canrpeta de congiguracion aparte
 const apiUrl = import.meta.env.VITE_API;
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
           <Card data={item} key={item.id} />
         ))}
       </div>
+      <ProductDetail />
     </Layout>
   );
 }
