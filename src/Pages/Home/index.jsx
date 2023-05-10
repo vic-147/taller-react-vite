@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Layout } from "../../Components/Layout";
-import { Card } from "../../Card/inde";
+import { Card } from "../../Components/Card";
 import { ProductDetail } from "../../Components/PoriductDetial";
 // deberi estar en una canrpeta de congiguracion aparte
 const apiUrl = import.meta.env.VITE_API;

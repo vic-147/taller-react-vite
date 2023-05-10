@@ -24,7 +24,7 @@ const ProductDetail = () => {
       <figure className="px-6">
         <img
           className="w-full h-full rounded-lg"
-          src={context.showProductDetail.images[0]}
+          src={context.showProductDetail.images?.[0]}
           alt={context.showProductDetail.title}
         />
       </figure>
@@ -42,5 +42,7 @@ const ProductDetail = () => {
     </aside>
   );
 };
+
+// tendra problema este codifo src={context.showProductDetail.images[0]
 
 export { ProductDetail };

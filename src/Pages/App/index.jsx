@@ -8,6 +8,7 @@ import MyOrders from "@Pages/MyOrders";
 import MyAccount from "@Pages/MyAccount";
 import NotFound from "@Pages/NotFound";
 import SingIn from "@Pages/SingIn";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import "./idex.css";
 
 const AppRoutes = () => {
@@ -31,6 +32,7 @@ export default function App() {
         <BrowserRouter>
           <AppRoutes />
           <Navbar />
+          <CheckoutSideMenu />
         </BrowserRouter>
       </ShoppinCartProvider>
     </>

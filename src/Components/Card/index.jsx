@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { ShoppinCartContext } from "../Context";
+import { ShoppinCartContext } from "../../Context";
 
 const Card = (data) => {
   const context = useContext(ShoppinCartContext);
@@ -8,6 +8,13 @@ const Card = (data) => {
   const ShowProduct = (productDetail) => {
     context.openProductDetail();
     context.setShowProductDetail(productDetail);
+  };
+
+  const addProductToCart = (event, productData) => {
+    event.stopPropagation();
+    context.setCount(context.count + 1);
+    context.setCartProducts(productData);
+    context.openCheckoutSideMenu();
   };
 
   return (
@@ -26,7 +33,7 @@ const Card = (data) => {
         />
         <div
           className="absolute bottom-0 right-0 flex justify-center items-center rounded-full m-2"
-          onClick={() => context.setCount(context.count + 1)}
+          onClick={(event) => addProductToCart(event, data.data)}
         >
           <AiFillPlusCircle className="h-6 w-6 text-white cursor-pointer" />
         </div>
