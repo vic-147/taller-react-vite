@@ -99,7 +99,7 @@ const Navbar = () => {
         </li>
         <li className="flex">
           <AiOutlineShopping className=" h-6 w-6 text-black-500 cursor-pointer" />
-          <div>{context.count}</div>
+          <div>{context?.count}</div>
         </li>
       </ul>
     </nav>

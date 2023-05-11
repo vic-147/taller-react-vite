@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { BsFillBagCheckFill } from "react-icons/bs";
 import { ShoppinCartContext } from "../../Context";
 
 const Card = (data) => {
@@ -13,8 +14,33 @@ const Card = (data) => {
   const addProductToCart = (event, productData) => {
     event.stopPropagation();
     context.setCount(context.count + 1);
-    context.setCartProducts(productData);
+    context.setCartProducts([...context.cartProducts, productData]);
     context.openCheckoutSideMenu();
+  };
+
+  const renderIcon = (id) => {
+    const isInCart =
+      context.cartProducts.filter((product) => product.id === id).length > 0;
+
+    if (isInCart) {
+      return (
+        <div
+          className="absolute bottom-0 right-0 flex justify-center items-center rounded-full m-2"
+          onClick={(event) => addProductToCart(event, data.data)}
+        >
+          <BsFillBagCheckFill className="h-6 w-6 text-white" />
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className="absolute bottom-0 right-0 flex justify-center items-center rounded-full m-2"
+          onClick={(event) => addProductToCart(event, data.data)}
+        >
+          <AiFillPlusCircle className="h-6 w-6 text-white cursor-pointer" />
+        </div>
+      );
+    }
   };
 
   return (
@@ -31,12 +57,7 @@ const Card = (data) => {
           src={data.data.images[0]}
           alt={data.data.title}
         />
-        <div
-          className="absolute bottom-0 right-0 flex justify-center items-center rounded-full m-2"
-          onClick={(event) => addProductToCart(event, data.data)}
-        >
-          <AiFillPlusCircle className="h-6 w-6 text-white cursor-pointer" />
-        </div>
+        {renderIcon(data.data.id)}
       </figure>
       <p className="flex justify-between">
         <span className="text-lg font-light ml-2">{data.data.title}</span>

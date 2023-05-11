@@ -8,12 +8,12 @@ const ShoppinCartProvider = ({ children }) => {
     children: PropTypes.node.isRequired,
   };
   const [count, setCount] = useState(0);
-  
+
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
   // modificadores produc ditail open/close
   const openProductDetail = () => setIsProductDetailOpen(true);
   const closeProductDetail = () => setIsProductDetailOpen(false);
-  
+
   const [isCheckoutSideMneu, setIsCheckoutSideMneu] = useState(false);
   // modificadores produc ditail open/close
   const openCheckoutSideMenu = () => setIsCheckoutSideMneu(true);
@@ -38,7 +38,7 @@ const ShoppinCartProvider = ({ children }) => {
         setCartProducts,
         isCheckoutSideMneu,
         openCheckoutSideMenu,
-        closeCheckoutSideMenu
+        closeCheckoutSideMenu,
       }}
     >
       {children}
