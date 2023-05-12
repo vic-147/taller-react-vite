@@ -19,7 +19,7 @@ const CheckoutSideMenu = () => {
 
   const handleCheckout = () => {
     const orderTotal = {
-      data: new Date(),
+      date: new Date(),
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts),
@@ -27,6 +27,7 @@ const CheckoutSideMenu = () => {
 
     context.setOrder([...context.order, orderTotal]);
     context.setCartProducts([]);
+    context.closeCheckoutSideMenu();
   };
 
   return (
@@ -35,6 +36,7 @@ const CheckoutSideMenu = () => {
         context.isCheckoutSideMneu ? "flex" : "hidden"
       } flex-col fixed right-0 border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-80px)] bottom-4`}
     >
+
       <div className="flex justify-between items-center p-6">
         <h2 className="font-medium text-xl">My Orders</h2>
         <div>
@@ -73,6 +75,7 @@ const CheckoutSideMenu = () => {
           </button>
         </Link>
       </div>
+
     </aside>
   );
 };
