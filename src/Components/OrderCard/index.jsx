@@ -3,6 +3,15 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 const OrderCard = (props) => {
   const { id, title, imageURL, price, handleDelete } = props;
+  let renderTrashIcon;
+  if (handleDelete) {
+    renderTrashIcon = (
+      <FaRegTrashAlt
+        onClick={() => handleDelete(id)}
+        className="h-6 w-6 text-black-500 cursor-pointer"
+      />
+    );
+  }
 
   OrderCard.propTypes = {
     id: PropTypes.node.isRequired,
@@ -26,10 +35,7 @@ const OrderCard = (props) => {
       </div>
       <div className="flex items-center gap-2">
         <p className="text-lg font-medium">{price}</p>
-        <FaRegTrashAlt
-          onClick={() => handleDelete(id)}
-          className="h-6 w-6 text-black-500 cursor-pointer"
-        />
+        {renderTrashIcon}
       </div>
     </div>
   );

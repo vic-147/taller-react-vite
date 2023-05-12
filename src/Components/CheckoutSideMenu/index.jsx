@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { FiXCircle } from "react-icons/fi";
 import { ShoppinCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
@@ -6,6 +7,7 @@ import { totalPrice } from "../../utils";
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppinCartContext);
+
   // console.log(context.showProductDetail);
   // console.log('carro: ', context.cartProducts);
   const handleDelete = (id) => {
@@ -13,6 +15,18 @@ const CheckoutSideMenu = () => {
       (product) => product.id != id
     );
     context.setCartProducts(filteredProducts);
+  };
+
+  const handleCheckout = () => {
+    const orderTotal = {
+      data: new Date(),
+      products: context.cartProducts,
+      totalProducts: context.cartProducts.length,
+      totalPrice: totalPrice(context.cartProducts),
+    };
+
+    context.setOrder([...context.order, orderTotal]);
+    context.setCartProducts([]);
   };
 
   return (
@@ -30,7 +44,7 @@ const CheckoutSideMenu = () => {
         </div>
       </div>
 
-      <div className="px-6 overflow-y-scroll">
+      <div className="px-6 overflow-y-scroll flex-1">
         {context.cartProducts.map((product) => (
           <OrderCard
             key={product.id}
@@ -44,12 +58,20 @@ const CheckoutSideMenu = () => {
       </div>
 
       <div className="px-6">
-        <p className="flex justify-between items-center">
+        <p className="flex justify-between items-center mb-2">
           <span className="font-medium">Total:</span>
           <span className="font-medium text-2xl">
             ${totalPrice(context.cartProducts)}
           </span>
         </p>
+        <Link to={"/my-orders/last"}>
+          <button
+            className="bg-black text-white text-2xl w-full mb-6 py-2 rounded-lg"
+            onClick={() => handleCheckout()}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );

@@ -21,8 +21,12 @@ const ShoppinCartProvider = ({ children }) => {
 
   // Show product detail
   const [showProductDetail, setShowProductDetail] = useState({});
+
   // carrito de compras
   const [cartProducts, setCartProducts] = useState([]);
+
+  // Shopping cart - Order
+  const [order, setOrder] = useState([]);
 
   return (
     <ShoppinCartContext.Provider
@@ -39,6 +43,8 @@ const ShoppinCartProvider = ({ children }) => {
         isCheckoutSideMneu,
         openCheckoutSideMenu,
         closeCheckoutSideMenu,
+        order,
+        setOrder,
       }}
     >
       {children}
