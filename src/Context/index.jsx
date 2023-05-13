@@ -33,6 +33,7 @@ const ShoppinCartProvider = ({ children }) => {
 
   // get products
   const [items, setItems] = useState(null);
+  const [filteredItems, setFilteredItems] = useState(null);
 
   useEffect(() => {
     fetch(`${apiUrl}/products`)
@@ -42,6 +43,17 @@ const ShoppinCartProvider = ({ children }) => {
 
   //get product by title
   const [searchByTitle, setSearchByTitle] = useState(null);
+
+  const filteredItemsByTitle = (items) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    );
+  };
+
+  useEffect(() => {
+    if (searchByTitle)
+      setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+  }, [items, searchByTitle]);
 
   return (
     <ShoppinCartContext.Provider
@@ -64,6 +76,8 @@ const ShoppinCartProvider = ({ children }) => {
         setOrder,
         searchByTitle,
         setSearchByTitle,
+        filteredItems,
+        setFilteredItems
       }}
     >
       {children}

@@ -7,6 +7,20 @@ import { ShoppinCartContext } from "../../Context";
 export default function Home() {
   const context = useContext(ShoppinCartContext);
 
+  const renderView = () => {
+    if (context.searchByTitle?.length > 0) {
+      if (context.filteredItems?.length > 0) {
+        return context.filteredItems?.map((item) => (
+          <Card data={item} key={item.id} />
+        ));
+      } else {
+        return <p className="font-medium">Nothing to show :(</p>;
+      }
+    } else {
+      return context.items?.map((item) => <Card data={item} key={item.id} />);
+    }
+  };
+
   return (
     <Layout>
       <input
@@ -16,9 +30,7 @@ export default function Home() {
         onChange={(event) => context.setSearchByTitle(event.target.value)}
       />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {context.items?.map((item) => (
-          <Card data={item} key={item.id} />
-        ))}
+        {renderView()}
       </div>
       <ProductDetail />
     </Layout>
