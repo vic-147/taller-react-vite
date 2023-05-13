@@ -17,7 +17,7 @@ const ProductDetail = () => {
         <div>
           {" "}
           <div onClick={() => context.closeProductDetail()}>
-            <FiXCircle className="h-6 w-6 text-black-500 cursor-pointer" />
+            <FiXCircle className="h-6 w-6 text-black-500 cursor-pointer hover:text-red-500" />
           </div>
         </div>
       </div>

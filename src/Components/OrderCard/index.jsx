@@ -8,7 +8,7 @@ const OrderCard = (props) => {
     renderTrashIcon = (
       <FaRegTrashAlt
         onClick={() => handleDelete(id)}
-        className="h-6 w-6 text-black-500 cursor-pointer"
+        className="h-6 w-6 text-black-500 cursor-pointer hover:text-red-500"
       />
     );
   }
@@ -18,11 +18,11 @@ const OrderCard = (props) => {
     title: PropTypes.node.isRequired,
     imageURL: PropTypes.node.isRequired,
     price: PropTypes.node.isRequired,
-    handleDelete: PropTypes.node.isRequired,
   };
 
   return (
     <div className="flex justify-between items-center mb-2">
+
       <div className="flex items-center gap-2">
         <figure className="w-20 h-20">
           <img
@@ -33,6 +33,7 @@ const OrderCard = (props) => {
         </figure>
         <p className="text-sm font-light">{title}</p>
       </div>
+      
       <div className="flex items-center gap-2">
         <p className="text-lg font-medium">{price}</p>
         {renderTrashIcon}

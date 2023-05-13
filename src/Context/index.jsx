@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 const ShoppinCartContext = createContext();
@@ -28,9 +28,26 @@ const ShoppinCartProvider = ({ children }) => {
   // Shopping cart - Order
   const [order, setOrder] = useState([]);
 
+  // deberi estar en una canrpeta de congiguracion aparte
+  const apiUrl = import.meta.env.VITE_API;
+
+  // get products
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/products`)
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
+
+  //get product by title
+  const [searchByTitle, setSearchByTitle] = useState(null);
+
   return (
     <ShoppinCartContext.Provider
       value={{
+        items,
+        setItems,
         count,
         setCount,
         isProductDetailOpen,
@@ -45,6 +62,8 @@ const ShoppinCartProvider = ({ children }) => {
         closeCheckoutSideMenu,
         order,
         setOrder,
+        searchByTitle,
+        setSearchByTitle,
       }}
     >
       {children}

@@ -9,13 +9,13 @@ export default function MyOrders() {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center relative w-80">
-        <h1>Mis ordernes</h1>
+      <div className="flex items-center justify-center w-80 mb-4">
+        <h1 className="font-medum text-xl">Mis ordernes</h1>
       </div>
       {context.order.map((order, index) => (
-        <Link key={index} to={`/my-orders/${order.id}`}>
+        <Link key={index} to={`/my-orders/${index}`}>
           <OrdersCard
-            date={order.date.getFullYear()}
+            date={order.date.toLocaleDateString()}
             totalPrice={order.totalPrice}
             totalProducts={order.totalProducts}
           />

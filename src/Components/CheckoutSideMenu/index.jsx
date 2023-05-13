@@ -28,6 +28,7 @@ const CheckoutSideMenu = () => {
     context.setOrder([...context.order, orderTotal]);
     context.setCartProducts([]);
     context.closeCheckoutSideMenu();
+    console.log(orderTotal.date);
   };
 
   return (
@@ -36,12 +37,11 @@ const CheckoutSideMenu = () => {
         context.isCheckoutSideMneu ? "flex" : "hidden"
       } flex-col fixed right-0 border bg-white border-black rounded-lg w-[360px] h-[calc(100vh-80px)] bottom-4`}
     >
-
       <div className="flex justify-between items-center p-6">
         <h2 className="font-medium text-xl">My Orders</h2>
         <div>
           <div onClick={() => context.closeCheckoutSideMenu()}>
-            <FiXCircle className="h-6 w-6 text-black-500 cursor-pointer" />
+            <FiXCircle className="h-6 w-6 text-black-500 cursor-pointer hover:text-red-500" />
           </div>
         </div>
       </div>
@@ -68,14 +68,13 @@ const CheckoutSideMenu = () => {
         </p>
         <Link to={"/my-orders/last"}>
           <button
-            className="bg-black text-white text-2xl w-full mb-6 py-2 rounded-lg"
+            className="text-black text-2xl border border-black w-full mb-6 py-2 rounded-lg hover:bg-green-500 hover:border-green-500 hover:text-white"
             onClick={() => handleCheckout()}
           >
             Checkout
           </button>
         </Link>
       </div>
-
     </aside>
   );
 };

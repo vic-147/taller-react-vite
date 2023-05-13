@@ -37,7 +37,7 @@ const Card = (data) => {
           className="absolute bottom-0 right-0 flex justify-center items-center rounded-full m-2"
           onClick={(event) => addProductToCart(event, data.data)}
         >
-          <AiFillPlusCircle className="h-6 w-6 text-white cursor-pointer" />
+          <AiFillPlusCircle className="h-6 w-6 text-white cursor-pointer bg-black/60 rounded-full" />
         </div>
       );
     }
