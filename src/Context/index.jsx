@@ -50,10 +50,63 @@ const ShoppinCartProvider = ({ children }) => {
     );
   };
 
+  // filtered by category
+  const [searchByCategory, setSearchByCategory] = useState(null);
+
+  const filteredItemsByCategory = (items) => {
+    return items?.filter((item) =>
+      item.category.name.toLowerCase().includes(searchByCategory.toLowerCase())
+    );
+  };
+
+  const filterBy = (searchType, searchByTitle, searchByCategory) => {
+    if (searchType === "BY_TITLE") {
+      return filteredItemsByTitle(items, searchByTitle);
+    }
+    if (searchType === "BY_CATEGORY") {
+      return filteredItemsByCategory(items, searchByCategory);
+    }
+    if (searchType === "BY_TITLE_AND_CATEGORY") {
+      return filteredItemsByCategory(items, searchByCategory).filter((item) =>
+        item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+      );
+    }
+    if (!searchType) {
+      return items;
+    }
+  };
+
   useEffect(() => {
-    if (searchByTitle)
-      setFilteredItems(filteredItemsByTitle(items, searchByTitle));
-  }, [items, searchByTitle]);
+    if (searchByTitle && searchByCategory)
+      setFilteredItems(
+        filteredItemsByTitle(
+          filterBy(
+            "BY_TITLE_AND_CATEGORY",
+            items,
+            searchByTitle,
+            searchByCategory
+          )
+        )
+      );
+    if (searchByTitle && !searchByCategory)
+      setFilteredItems(
+        filteredItemsByTitle(
+          filterBy("BY_TITLE", items, searchByTitle, searchByCategory)
+        )
+      );
+    if (!searchByTitle && searchByCategory)
+      setFilteredItems(
+        filteredItemsByTitle(
+          filterBy("BY_CATEGORY", items, searchByTitle, searchByCategory)
+        )
+      );
+    if (!searchByTitle && !searchByCategory)
+      setFilteredItems(
+        filteredItemsByTitle(
+          filterBy(null, items, searchByTitle, searchByCategory)
+        )
+      );
+  }, [items, searchByTitle, searchByCategory]);
 
   return (
     <ShoppinCartContext.Provider
@@ -77,7 +130,9 @@ const ShoppinCartProvider = ({ children }) => {
         searchByTitle,
         setSearchByTitle,
         filteredItems,
-        setFilteredItems
+        setFilteredItems,
+        searchByCategory,
+        setSearchByCategory,
       }}
     >
       {children}
