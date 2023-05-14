@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 
 const ShoppinCartContext = createContext();
 
+// deberi estar en una canrpeta de congiguracion aparte
+const apiUrl = import.meta.env.VITE_API;
+
 const ShoppinCartProvider = ({ children }) => {
   ShoppinCartProvider.propTypes = {
     children: PropTypes.node.isRequired,
@@ -28,9 +31,6 @@ const ShoppinCartProvider = ({ children }) => {
   // Shopping cart - Order
   const [order, setOrder] = useState([]);
 
-  // deberi estar en una canrpeta de congiguracion aparte
-  const apiUrl = import.meta.env.VITE_API;
-
   // get products
   const [items, setItems] = useState(null);
   const [filteredItems, setFilteredItems] = useState(null);
@@ -43,37 +43,32 @@ const ShoppinCartProvider = ({ children }) => {
 
   //get product by title
   const [searchByTitle, setSearchByTitle] = useState(null);
+  const [searchByCategory, setSearchByCategory] = useState(null);
 
   const filteredItemsByTitle = (items) => {
     return items?.filter((item) =>
-      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+      item.title.toLowerCase().includes(searchByTitle?.toLowerCase())
     );
   };
 
   // filtered by category
-  const [searchByCategory, setSearchByCategory] = useState(null);
-
   const filteredItemsByCategory = (items) => {
     return items?.filter((item) =>
-      item.category.name.toLowerCase().includes(searchByCategory.toLowerCase())
+      item.category.name.toLowerCase().includes(searchByCategory?.toLowerCase())
     );
   };
 
-  const filterBy = (searchType, searchByTitle, searchByCategory) => {
+  const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
     if (searchType === "BY_TITLE") {
       return filteredItemsByTitle(items, searchByTitle);
-    }
-    if (searchType === "BY_CATEGORY") {
+    } else if (searchType === "BY_CATEGORY") {
       return filteredItemsByCategory(items, searchByCategory);
-    }
-    if (searchType === "BY_TITLE_AND_CATEGORY") {
+    } else if (searchType === "BY_TITLE_AND_CATEGORY") {
       return filteredItemsByCategory(items, searchByCategory).filter((item) =>
-        item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+        item?.title.toLowerCase().includes(searchByTitle?.toLowerCase())
       );
     }
-    if (!searchType) {
-      return items;
-    }
+    return items;
   };
 
   useEffect(() => {

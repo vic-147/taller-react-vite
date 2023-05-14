@@ -27,8 +27,8 @@ const CheckoutSideMenu = () => {
 
     context.setOrder([...context.order, orderTotal]);
     context.setCartProducts([]);
+    context.setSearchByTitle(null);
     context.closeCheckoutSideMenu();
-    console.log(orderTotal.date);
   };
 
   return (
